@@ -1,17 +1,26 @@
+# fly.toml app configuration file generated for ronny-tailscale-exit on 2023-05-08T23:53:45+10:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
 app = "ronny-tailscale-exit"
+primary_region = "syd"
 kill_signal = "SIGINT"
-kill_timeout = 5
+kill_timeout = "5s"
+
+[experimental]
+  auto_rollback = true
 
 [env]
   PORT = "41641"
 
-[experimental]
-  auto_rollback = true
-  private_network = true
-
 [[services]]
-  internal_port = 41641
   protocol = "udp"
+  internal_port = 41641
 
   [[services.ports]]
     port = 41641
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20
