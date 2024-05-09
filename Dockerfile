@@ -7,7 +7,7 @@ COPY . ./
 FROM alpine:latest as tailscale
 RUN apk update && apk add ca-certificates wget && rm -rf /var/cache/apk/*
 WORKDIR /app
-ENV TSFILE=tailscale_1.58.2_amd64.tgz
+ENV TSFILE=tailscale_1.66.0_amd64.tgz
 RUN wget --inet4-only https://pkgs.tailscale.com/stable/${TSFILE} && \
   tar xzf ${TSFILE} --strip-components=1
 
